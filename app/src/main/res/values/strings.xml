@@ -1,23 +1,14 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name" translatable="false">CurrencyEx</string>
     <string-array name="values">
-    <item name="Grivnya" type="string" translatable="false">UAH </item>
-    <item name="Ruble" type="string" translatable="false">RUB </item>
-    <item name="Dollar" type="string" translatable="false">USD </item>
-    <item name="Euro" type="string" translatable="false">EUR </item>
-    <item name="Bitcoin" type="string" translatable="false">BTC </item>
-    <item name="Australian_Dollar" type="string" translatable="false">AUD </item>
-    <item name="Real" type="string" translatable="false">UBRL </item>
-    <item name="Canadian_Dollar" type="string" translatable="false">CAD </item>
-        <item name="Yuan" type="string" translatable="false">CNY </item></string-array>
-    <string-array name="values2" tools:ignore="DuplicateDefinition">
-        <item name="Grivnya" type="string" translatable="false">UAH </item>
-        <item name="Ruble" type="string" translatable="false">RUB </item>
-        <item name="Dollar" type="string" translatable="false">USD </item>
-        <item name="Euro" type="string" translatable="false">EUR </item>
-        <item name="Bitcoin" type="string" translatable="false">BTC </item>
-        <item name="Australian_Dollar" type="string" translatable="false">AUD </item>
-        <item name="Real" type="string" translatable="false">UBRL </item>
-        <item name="Canadian_Dollar" type="string" translatable="false">CAD </item>
-        <item name="Yuan" type="string" translatable="false">CNY </item></string-array>
+        <item name="Grivnya" translatable="false" type="string">UAH </item>
+        <item name="Ruble" translatable="false" type="string">RUB </item>
+        <item name="Dollar" translatable="false" type="string">USD </item>
+        <item name="Euro" translatable="false" type="string">EUR </item>
+        <item name="Bitcoin" translatable="false" type="string">BTC </item>
+        <item name="Australian_Dollar" translatable="false" type="string">AUD </item>
+        <item name="Real" translatable="false" type="string">UBRL </item>
+        <item name="Canadian_Dollar" translatable="false" type="string">CAD </item>
+        <item name="Yuan" translatable="false" type="string">CNY </item>
+    </string-array>
 </resources>
