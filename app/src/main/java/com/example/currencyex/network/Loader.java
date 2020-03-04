@@ -1,5 +1,7 @@
 package com.example.currencyex.network;
 
+import android.widget.TextView;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -18,7 +20,7 @@ public class Loader {
                 .url("https://restcountries-v1.p.rapidapi.com/name/norge")
                 .get()
                 .addHeader("x-rapidapi-host", "restcountries-v1.p.rapidapi.com")
-                .addHeader("x-rapidapi-key", "930585e7admshbb5fbca527d317dp12463djsn260d42de2a05")
+                .addHeader("x-rapidapi-key", "2197c111c8mshb525c66246e5404p1ccf07jsnc4c5fe51c929")
                 .build();
 
         client.newCall(request).enqueue(new Callback() {
@@ -42,7 +44,7 @@ public class Loader {
                         + currFrom + "&to=" + currTo + "&amount=" + amount)
                 .get()
                 .addHeader("x-rapidapi-host", "fixer-fixer-currency-v1.p.rapidapi.com")
-                .addHeader("x-rapidapi-key", "930585e7admshbb5fbca527d317dp12463djsn260d42de2a05")
+                .addHeader("x-rapidapi-key", "2197c111c8mshb525c66246e5404p1ccf07jsnc4c5fe51c929")
                 .build();
 
         client.newCall(request).enqueue(new Callback() {
