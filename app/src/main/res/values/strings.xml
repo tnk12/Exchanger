@@ -10,5 +10,167 @@
         <item name="Real" translatable="false" type="string">UBRL </item>
         <item name="Canadian_Dollar" translatable="false" type="string">CAD </item>
         <item name="Yuan" translatable="false" type="string">CNY </item>
+        <item name="Afghan Afghani" translatable="false" type="string">AFN </item>
+        <item name="Albanian Lek" translatable="false" type="string">ALL </item>
+        <item name="Armenian Dram" translatable="false" type="string">AMD </item>
+        <item name="Netherlands Antillean Guilder" translatable="false" type="string">ANG </item>
+        <item name="Angolan Kwanza" translatable="false" type="string">AOA </item>
+        <item name="Argentine Peso" translatable="false" type="string">ARS </item>
+        <item name="Aruban Florin" translatable="false" type="string">AWG </item>
+        <item name="Azerbaijani Manat" translatable="false" type="string">AZN </item>
+        <item name="GrivnyaBosnia-Herzegovina Convertible Mark" translatable="false" type="string">BAM</item>
+        <item name="Barbadian Dollar" translatable="false" type="string">BBD </item>
+        <item name="Bangladeshi Taka" translatable="false" type="string">BDT </item>
+        <item name="Bulgarian Lev" translatable="false" type="string">BGN </item>
+        <item name="Bahraini Dinar" translatable="false" type="string">BHD </item>
+        <item name="Burundian Franc" translatable="false" type="string">BIF</item>
+        <item name="Bermudan Dollar" translatable="false" type="string">BMD </item>
+        <item name="Brunei Dollar" translatable="false" type="string">BND </item>
+        <item name="Bolivian Boliviano" translatable="false" type="string">BOB </item>
+        <item name="Brazilian Real" translatable="false" type="string">BRL </item>
+        <item name="Bahamian Dollar" translatable="false" type="string">BSD </item>
+        <item name="Bhutanese Ngultrum" translatable="false" type="string">BTN </item>
+        <item name="Botswanan Pula" translatable="false" type="string">BWP </item>
+        <item name="New Belarusian Ruble" translatable="false" type="string">BYN </item>
+        <item name="Belarusian Ruble" translatable="false" type="string">BYR </item>
+        <item name="Belize Dollar" translatable="false" type="string">BZD </item>
+        <item name="Congolese Franc" translatable="false" type="string">CDF </item>
+        <item name="Swiss Franc" translatable="false" type="string">CHF </item>
+        <item name="Chilean Unit of Account (UF)" translatable="false" type="string">CLF </item>
+        <item name="Chilean Peso" translatable="false" type="string">CLP </item>
+        <item name="Colombian Peso" translatable="false" type="string">COP </item>
+        <item name="Costa Rican Colón" translatable="false" type="string">CRC </item>
+        <item name="Cuban Convertible Peso" translatable="false" type="string">CUC </item>
+        <item name="Cuban Peso" translatable="false" type="string">CUP </item>
+        <item name="Cape Verdean Escudo" translatable="false" type="string">CVE </item>
+        <item name="Czech Republic Koruna" translatable="false" type="string">CZK </item>
+        <item name="Djiboutian Franc" translatable="false" type="string">DJF </item>
+        <item name="Danish Krone" translatable="false" type="string">DKK </item>
+        <item name="Dominican Peso" translatable="false" type="string">DOP </item>
+        <item name="Algerian Dinar" translatable="false" type="string">DZD </item>
+        <item name="Egyptian Pound" translatable="false" type="string">EGP </item>
+        <item name="Eritrean Nakfa" translatable="false" type="string">ERN </item>
+        <item name="Ethiopian Birr" translatable="false" type="string">ETB </item>
+        <item name="Fijian Dollar" translatable="false" type="string">FJD</item>
+        <item name="Falkland Islands Pound" translatable="false" type="string">FKP </item>
+        <item name="British Pound Sterling" translatable="false" type="string">GBP </item>
+        <item name="Georgian Lari" translatable="false" type="string">GEL </item>
+        <item name="Guernsey Pound" translatable="false" type="string">GGP </item>
+        <item name="Ghanaian Cedi" translatable="false" type="string">GHS</item>
+        <item name="Gibraltar Pound" translatable="false" type="string">GIP </item>
+        <item name="Gambian Dalasi" translatable="false" type="string">GMD </item>
+        <item name="Guinean Franc" translatable="false" type="string">GNF </item>
+        <item name="Guatemalan Quetzal" translatable="false" type="string">GTQ </item>
+        <item name="Guyanaese Dollar" translatable="false" type="string">GYD </item>
+        <item name="Hong Kong Dollar" translatable="false" type="string">HKD </item>
+        <item name="Honduran Lempira" translatable="false" type="string">HNL </item>
+        <item name="Croatian Kuna" translatable="false" type="string">HRK </item>
+        <item name="Haitian Gourde" translatable="false" type="string">HTG </item>
+        <item name="Hungarian Forint" translatable="false" type="string">HUF </item>
+        <item name="Indonesian Rupiah" translatable="false" type="string">IDR </item>
+        <item name="Israeli New Sheqel" translatable="false" type="string">ILS </item>
+        <item name="Manx pound" translatable="false" type="string">IMP </item>
+        <item name="Indian Rupee" translatable="false" type="string">INR </item>
+        <item name="Iraqi Dinar" translatable="false" type="string">IQD </item>
+        <item name="Iranian Rial" translatable="false" type="string">IRR </item>
+        <item name="Icelandic Króna" translatable="false" type="string">ISK </item>
+        <item name="Jersey Pound" translatable="false" type="string">JEP </item>
+        <item name="Jamaican Dollar" translatable="false" type="string">JMD </item>
+        <item name="Jordanian Dinar" translatable="false" type="string">JOD </item>
+        <item name="Kenyan Shilling" translatable="false" type="string">KES </item>
+        <item name="Kyrgystani Som" translatable="false" type="string">KGS </item>
+        <item name="Cambodian Riel" translatable="false" type="string">KHR </item>
+        <item name="Comorian Franc" translatable="false" type="string">KMF</item>
+        <item name="North Korean Won" translatable="false" type="string">KPW </item>
+        <item name="South Korean Won" translatable="false" type="string">KRW </item>
+        <item name="Kuwaiti Dinar" translatable="false" type="string">KWD </item>
+        <item name="Cayman Islands Dollar" translatable="false" type="string">KYD </item>
+        <item name="Kazakhstani Tenge" translatable="false" type="string">KZT</item>
+        <item name="Laotian Kip" translatable="false" type="string">LAK </item>
+        <item name="Lebanese Pound" translatable="false" type="string">LBP </item>
+        <item name="Sri Lankan Rupee" translatable="false" type="string">LKR </item>
+        <item name="Liberian Dollar" translatable="false" type="string">LRD </item>
+        <item name="Lesotho Loti" translatable="false" type="string">LSL </item>
+        <item name="Lithuanian Litas" translatable="false" type="string">LTL </item>
+        <item name="Latvian Lats" translatable="false" type="string">LVL </item>
+        <item name="Libyan Dinar" translatable="false" type="string">LYD </item>
+        <item name="Moroccan Dirham" translatable="false" type="string">MAD </item>
+        <item name="Moldovan Leu" translatable="false" type="string">MDL </item>
+        <item name="Malagasy Ariary" translatable="false" type="string">MGA </item>
+        <item name="Macedonian Denar" translatable="false" type="string">MKD </item>
+        <item name="Myanma Kyat" translatable="false" type="string">MMK </item>
+        <item name="Mongolian Tugrik" translatable="false" type="string">MNT </item>
+        <item name="Macanese Pataca" translatable="false" type="string">MOP </item>
+        <item name="Mauritanian Ouguiya" translatable="false" type="string">MRO </item>
+        <item name="Mauritian Rupee" translatable="false" type="string">MUR </item>
+        <item name="Maldivian Rufiyaa" translatable="false" type="string">MVR </item>
+        <item name="Malawian Kwacha" translatable="false" type="string">MWK </item>
+        <item name="Mexican Peso" translatable="false" type="string">MXN </item>
+        <item name="Malaysian Ringgit" translatable="false" type="string">MYR </item>
+        <item name="Mozambican Metical" translatable="false" type="string">MZN </item>
+        <item name="Namibian Dollar" translatable="false" type="string">NAD </item>
+        <item name="Nigerian Naira" translatable="false" type="string">NGN</item>
+        <item name="Nicaraguan Córdoba" translatable="false" type="string">NIO </item>
+        <item name="Norwegian Krone" translatable="false" type="string">NOK </item>
+        <item name="Nepalese Rupee" translatable="false" type="string">NPR </item>
+        <item name="New Zealand Dollar" translatable="false" type="string">NZD </item>
+        <item name="Omani Rial" translatable="false" type="string">OMR</item>
+        <item name="Panamanian Balboa" translatable="false" type="string">PAB </item>
+        <item name="Peruvian Nuevo Sol" translatable="false" type="string">PEN </item>
+        <item name="Papua New Guinean Kina" translatable="false" type="string">PGK </item>
+        <item name="Philippine Peso" translatable="false" type="string">PHP </item>
+        <item name="Pakistani Rupee" translatable="false" type="string">PKR </item>
+        <item name="Polish Zloty" translatable="false" type="string">PLN </item>
+        <item name="Paraguayan Guarani" translatable="false" type="string">PYG </item>
+        <item name="Qatari Rial" translatable="false" type="string">QAR </item>
+        <item name="Romanian Leu" translatable="false" type="string">RON </item>
+        <item name="Serbian Dinar" translatable="false" type="string">RSD </item>
+        <item name="Rwandan Franc" translatable="false" type="string">RWF </item>
+        <item name="Saudi Riyal" translatable="false" type="string">SAR </item>
+        <item name="Solomon Islands Dollar" translatable="false" type="string">SCR </item>
+        <item name="Seychellois Rupee" translatable="false" type="string">SCCR </item>
+        <item name="Sudanese Pound" translatable="false" type="string">SDG </item>
+        <item name="Swedish Krona" translatable="false" type="string">SEK </item>
+        <item name="Singapore Dollar" translatable="false" type="string">SGD </item>
+        <item name="Saint Helena Pound" translatable="false" type="string">SHP </item>
+        <item name="Sierra Leonean Leone" translatable="false" type="string">SLL </item>
+        <item name="Somali Shilling" translatable="false" type="string">SOS </item>
+        <item name="Surinamese Dollar" translatable="false" type="string">SRD </item>
+        <item name="São Tomé and Príncipe Dobra" translatable="false" type="string">STD </item>
+        <item name="Salvadoran Colón" translatable="false" type="string">SVC </item>
+        <item name="Syrian Pound" translatable="false" type="string">SYP </item>
+        <item name="Swazi Lilangeni" translatable="false" type="string">SZL </item>
+        <item name="Thai Baht" translatable="false" type="string">THB </item>
+        <item name="Tajikistani Somoni" translatable="false" type="string">TJS </item>
+        <item name="Turkmenistani Manat" translatable="false" type="string">TMT </item>
+        <item name="Tunisian Dinar" translatable="false" type="string">TND </item>
+        <item name="Tongan Paʻanga" translatable="false" type="string">TOP </item>
+        <item name="Turkish Lira" translatable="false" type="string">TRY </item>
+        <item name="Trinidad and Tobago Dollar" translatable="false" type="string">TTD</item>
+        <item name="New Taiwan Dollar" translatable="false" type="string">TWD </item>
+        <item name="Tanzanian Shilling" translatable="false" type="string">TZS </item>
+        <item name="Ugandan Shilling" translatable="false" type="string">UGX </item>
+        <item name="Uruguayan Peso" translatable="false" type="string">UYU </item>
+        <item name="Uzbekistan Som" translatable="false" type="string">UZS</item>
+        <item name="Venezuelan Bolívar Fuerte" translatable="false" type="string">VEF </item>
+        <item name="Vietnamese Dong" translatable="false" type="string">VND </item>
+        <item name="Vanuatu Vatu" translatable="false" type="string">VUV </item>
+        <item name="Samoan Tala" translatable="false" type="string">WST </item>
+        <item name="CFA Franc BEAC" translatable="false" type="string">XAF </item>
+        <item name="East Caribbean Dollar" translatable="false" type="string">XCD </item>
+        <item name="Special Drawing Rights" translatable="false" type="string">XDR </item>
+        <item name="SCFA Franc BCEAO" translatable="false" type="string">XOF </item>
+        <item name="CFP Franc" translatable="false" type="string">XPF </item>
+        <item name="Yemeni Rial" translatable="false" type="string">YER </item>
+        <item name="South African Rand" translatable="false" type="string">ZAR </item>
+        <item name="Zambian Kwacha (pre-2013)" translatable="false" type="string">ZMK </item>
+        <item name="Zimbabwean Dollar" translatable="false" type="string">ZWL </item>
+
+
+
+
+
     </string-array>
+
+
 </resources>

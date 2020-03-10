@@ -11,6 +11,8 @@ public class ConvertResultPOJO {
     private String date;
     private Double result;
 
+    //objects setters and getters
+
     public Boolean getSuccess() {
         return success;
     }
