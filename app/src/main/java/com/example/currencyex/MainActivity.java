@@ -1,15 +1,24 @@
 package com.example.currencyex;
 
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.VideoView;
+
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.currencyex.helpers.Parser;
 import com.example.currencyex.model.ConvertResultPOJO;
@@ -21,10 +30,30 @@ import com.example.currencyex.utils.L;
 public class MainActivity extends AppCompatActivity {
     private TextView  tvConvertResult;
     EditText editText;
+    ActionBar actionBar;
+    private VideoView videoView;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Adding videoView
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        videoView = (VideoView)findViewById(R.id.videoView);
+        Uri video = Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.anim);
+        videoView.setVideoURI(video);
+        videoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+              finish();
+            }
+        });
+        videoView.start();
+
+
+        //Changing toolbar background
+        actionBar = getSupportActionBar();
+        actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#000000")));
 
         //Making spinnerFrom
         final Spinner spinnerFrom = findViewById(R.id.spinner_from);
