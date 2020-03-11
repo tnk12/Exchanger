@@ -59,7 +59,6 @@
         android:textColor="@color/black"
         android:textColorLink="@color/black"
         android:textCursorDrawable="@null"
-
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.476"
