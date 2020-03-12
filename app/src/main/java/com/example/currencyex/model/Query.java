@@ -4,7 +4,7 @@ public class Query {
 
     private String from;
     private String to;
-    private Integer amount;
+    private Long amount;
 
     public String getFrom() {
         return from;
@@ -22,11 +22,11 @@ public class Query {
         this.to = to;
     }
 
-    public Integer getAmount() {
+    public Long getAmount() {
         return amount;
     }
 
-    public void setAmount(Integer amount) {
+    public void setAmount(Long amount) {
         this.amount = amount;
     }
 }

@@ -16,6 +16,7 @@ import android.widget.VideoView;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.currencyex.helpers.Parser;
 import com.example.currencyex.model.ConvertResultPOJO;
 import com.example.currencyex.network.Loader;
@@ -24,7 +25,7 @@ import com.example.currencyex.utils.L;
 
 
 public class MainActivity extends AppCompatActivity {
-    private TextView  tvConvertResult;
+    private TextView tvConvertResult;
     EditText editText;
     ActionBar actionBar;
     private VideoView videoView;
@@ -33,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
 
 
         //Changing toolbar background
@@ -58,13 +58,13 @@ public class MainActivity extends AppCompatActivity {
         convertButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(editText.length()>0 & editText.length()<20) {
+                if (editText.length() > 0 & editText.length() < 20) {
                     String currencyFrom = (String) spinnerFrom.getSelectedItem();
                     Log.d(L.D0, currencyFrom);
                     String currencyTo = (String) spinnerTo.getSelectedItem();
                     Log.d(L.D0, currencyTo);
                     runConvert(spinnerFrom.getSelectedItem().toString(), spinnerTo.getSelectedItem().toString(), editText.getText());
-                }else {
+                } else {
                     tvConvertResult.setText("");
                     showToast("Error!");
                 }
@@ -87,16 +87,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void runConvert(String currencyFrom, String currencyTo, Editable amount) {
-       Spinner spinnerFrom = findViewById(R.id.spinner_from);
-       final Spinner spinnerTo = findViewById(R.id.spinner_to);
-       final EditText editText = findViewById(R.id.editTextCurr);
+        Spinner spinnerFrom = findViewById(R.id.spinner_from);
+        final Spinner spinnerTo = findViewById(R.id.spinner_to);
+        final EditText editText = findViewById(R.id.editTextCurr);
         Loader.loadConvertedData(spinnerFrom.getSelectedItem().toString(), spinnerTo.getSelectedItem().toString(), editText.getText().toString(), new OnDataReceived() {
             @Override
             public void onDataReceived(String result) {
                 Log.d(L.D0, "loadConvertedData: " + result);
-                if (result != null & editText.length()>0) {
-                    ConvertResultPOJO convertResultPOJO = Parser.parseConvertResult(result);
-                    tvConvertResult.setText(convertResultPOJO.getResult().toString()+" - "+spinnerTo.getSelectedItem().toString());
+                if (result != null & editText.length() > 0) {
+                    final ConvertResultPOJO convertResultPOJO = Parser.parseConvertResult(result);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            tvConvertResult.setText(convertResultPOJO.getResult().toString() + " - " + spinnerTo.getSelectedItem().toString());
+                        }
+                    });
                 } else {
                     showToast("Load data error");
                     tvConvertResult.setText("");
