@@ -1,15 +1,11 @@
 package com.example.currencyex;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,23 +28,12 @@ public class MainActivity extends AppCompatActivity {
     EditText editText;
     ActionBar actionBar;
     private VideoView videoView;
+    private static int  SPLASH_TIME_OUT = 4000;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //Adding videoView
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        videoView = (VideoView)findViewById(R.id.videoView);
-        Uri video = Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.anim);
-        videoView.setVideoURI(video);
-        videoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mp) {
-              finish();
-            }
-        });
-        videoView.start();
 
 
         //Changing toolbar background
