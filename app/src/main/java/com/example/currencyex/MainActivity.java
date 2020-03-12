@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     EditText editText;
     ActionBar actionBar;
     private VideoView videoView;
-    private static int  SPLASH_TIME_OUT = 4000;
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         convertButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(editText.length()>0) {
+                if(editText.length()>0 & editText.length()<20) {
                     String currencyFrom = (String) spinnerFrom.getSelectedItem();
                     Log.d(L.D0, currencyFrom);
                     String currencyTo = (String) spinnerTo.getSelectedItem();
@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
                     runConvert(spinnerFrom.getSelectedItem().toString(), spinnerTo.getSelectedItem().toString(), editText.getText());
                 }else {
                     tvConvertResult.setText("");
-                    showToast("Please,Enter summ!");
+                    showToast("Error!");
                 }
             }
         });

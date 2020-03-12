@@ -7,7 +7,6 @@
         <item name="Euro" translatable="false" type="string">EUR </item>
         <item name="Bitcoin" translatable="false" type="string">BTC </item>
         <item name="Australian_Dollar" translatable="false" type="string">AUD </item>
-        <item name="Real" translatable="false" type="string">UBRL </item>
         <item name="Canadian_Dollar" translatable="false" type="string">CAD </item>
         <item name="Yuan" translatable="false" type="string">CNY </item>
         <item name="Afghan Afghani" translatable="false" type="string">AFN </item>
