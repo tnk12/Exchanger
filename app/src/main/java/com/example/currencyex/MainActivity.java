@@ -22,6 +22,7 @@ import com.example.currencyex.network.Loader;
 import com.example.currencyex.network.OnDataReceived;
 import com.example.currencyex.utils.L;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -94,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
                     Log.d(L.D0, currencyTo);
 
                     runConvert(spinnerFrom.getSelectedItem().toString(), spinnerTo.getSelectedItem().toString(), editText.getText().toString());
+
                 } else {
                     tvConvertResult.setText("");
                     showToast("Error!");
@@ -126,7 +128,11 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(L.D0, "loadConvertedData: " + result);
                 if (result != null & editText.length() > 0) {
                     ConvertResultPOJO convertResultPOJO = Parser.parseConvertResult(result);
-                    tvConvertResult.setText(convertResultPOJO.getResult().toString() + " - " + spinnerTo.getSelectedItem().toString());
+
+                    double test = convertResultPOJO.getResult();
+                    DecimalFormat df = new DecimalFormat("#");
+                    df.setMaximumFractionDigits(0);
+                    tvConvertResult.setText(df.format(test) + " - " + spinnerTo.getSelectedItem().toString());
                 } else {
                     showToast("Load data error");
                     tvConvertResult.setText("");
