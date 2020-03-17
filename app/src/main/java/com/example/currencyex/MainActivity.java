@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView  tvConvertResult;
     EditText editText;
     ActionBar actionBar;
-    private VideoView videoView;
+    Double convertResultPOJO;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
                     Log.d(L.D0, currencyFrom);
                     String currencyTo = (String) spinnerTo.getSelectedItem();
                     Log.d(L.D0, currencyTo);
-                    runConvert(spinnerFrom.getSelectedItem().toString(), spinnerTo.getSelectedItem().toString(), editText.getText());
+                    runConvert(spinnerFrom.getSelectedItem().toString(), spinnerTo.getSelectedItem().toString(), editText.getText().toString());
                 }else {
                     tvConvertResult.setText("");
                     showToast("Error!");
@@ -86,11 +86,11 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void runConvert(String currencyFrom, String currencyTo, Editable amount) {
+    public void runConvert(String currencyFrom, String currencyTo, String amount) {
        Spinner spinnerFrom = findViewById(R.id.spinner_from);
        final Spinner spinnerTo = findViewById(R.id.spinner_to);
        final EditText editText = findViewById(R.id.editTextCurr);
-        Loader.loadConvertedData(spinnerFrom.getSelectedItem().toString(), spinnerTo.getSelectedItem().toString(), editText.getText().toString(), new OnDataReceived() {
+        Loader.loadConvertedData(spinnerFrom.getSelectedItem().toString(), spinnerTo.getSelectedItem().toString(),editText.getText().toString(), new OnDataReceived() {
             @Override
             public void onDataReceived(String result) {
                 Log.d(L.D0, "loadConvertedData: " + result);
