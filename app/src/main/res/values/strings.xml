@@ -164,9 +164,5 @@
         <item name="South African Rand" translatable="false" type="string">ZAR </item>
         <item name="Zambian Kwacha (pre-2013)" translatable="false" type="string">ZMK </item>
         <item name="Zimbabwean Dollar" translatable="false" type="string">ZWL </item>
-
-
     </string-array>
-
-
 </resources>
