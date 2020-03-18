@@ -1,22 +1,17 @@
 package com.example.currencyex;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Bundle;
-import android.text.Editable;
 import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.VideoView;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,12 +22,18 @@ import com.example.currencyex.network.Loader;
 import com.example.currencyex.network.OnDataReceived;
 import com.example.currencyex.utils.L;
 
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class MainActivity extends AppCompatActivity {
     private TextView tvConvertResult;
     EditText editText;
     ActionBar actionBar;
-    private VideoView videoView;
+    Double convertResultPOJO;
+    Spinner spinnerFrom;
+    Spinner spinnerTo;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,15 +44,40 @@ public class MainActivity extends AppCompatActivity {
         actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#000000")));
 
         //Making spinnerFrom
-        final Spinner spinnerFrom = findViewById(R.id.spinner_from);
+        spinnerFrom = findViewById(R.id.spinner_from);
         final ArrayAdapter<CharSequence> spinnerAdapterFrom = ArrayAdapter.createFromResource(this, R.array.values, android.R.layout.simple_spinner_item);
         spinnerAdapterFrom.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerFrom.setAdapter(spinnerAdapterFrom);
+        spinnerFrom.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                int count = parent.getCount();
+
+                List<String> list = new ArrayList<String>();
+                for (int i = 0; i < count; i++) {
+                    if (i == position) {
+                        continue;
+                    }
+                    list.add(parent.getItemAtPosition(i).toString());
+
+                    ArrayAdapter<CharSequence> spinnerAdapterTo = ArrayAdapter.createFromResource(MainActivity.this, R.array.values, android.R.layout.simple_spinner_item);
+                    spinnerAdapterTo.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spinnerTo.setAdapter(spinnerAdapterTo);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
         //Making spinnerTo
-        final Spinner spinnerTo = findViewById(R.id.spinner_to);
-        ArrayAdapter<CharSequence> spinnerAdapterTo = ArrayAdapter.createFromResource(this, R.array.values, android.R.layout.simple_spinner_item);
+        spinnerTo = findViewById(R.id.spinner_to);
+        final ArrayAdapter<CharSequence> spinnerAdapterTo = ArrayAdapter.createFromResource(this, R.array.values, android.R.layout.simple_spinner_item);
         spinnerAdapterTo.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerTo.setAdapter(spinnerAdapterTo);
+
         //Finding our elements
         tvConvertResult = findViewById(R.id.tv_convert_result);
         editText = findViewById(R.id.editTextCurr);
@@ -60,15 +86,19 @@ public class MainActivity extends AppCompatActivity {
         convertButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (editText.length() > 0) {
+                if ((editText.length() > 0) &&
+                        (!spinnerFrom.getSelectedItem().toString().equals(spinnerTo.getSelectedItem().toString()))) {
                     String currencyFrom = (String) spinnerFrom.getSelectedItem();
                     Log.d(L.D0, currencyFrom);
+
                     String currencyTo = (String) spinnerTo.getSelectedItem();
                     Log.d(L.D0, currencyTo);
-                    runConvert(spinnerFrom.getSelectedItem().toString(), spinnerTo.getSelectedItem().toString(), editText.getText());
+
+                    runConvert(spinnerFrom.getSelectedItem().toString(), spinnerTo.getSelectedItem().toString(), editText.getText().toString());
+
                 } else {
                     tvConvertResult.setText("");
-                    showToast("Please,Enter summ!");
+                    showToast("Error!");
                 }
             }
         });
@@ -88,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void runConvert(String currencyFrom, String currencyTo, Editable amount) {
+    public void runConvert(String currencyFrom, String currencyTo, String amount) {
         Spinner spinnerFrom = findViewById(R.id.spinner_from);
         final Spinner spinnerTo = findViewById(R.id.spinner_to);
         final EditText editText = findViewById(R.id.editTextCurr);
@@ -98,7 +128,11 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(L.D0, "loadConvertedData: " + result);
                 if (result != null & editText.length() > 0) {
                     ConvertResultPOJO convertResultPOJO = Parser.parseConvertResult(result);
-                    tvConvertResult.setText(convertResultPOJO.getResult().toString() + " - " + spinnerTo.getSelectedItem().toString());
+
+                    double test = convertResultPOJO.getResult();
+                    DecimalFormat df = new DecimalFormat("#");
+                    df.setMaximumFractionDigits(0);
+                    tvConvertResult.setText(df.format(test) + " - " + spinnerTo.getSelectedItem().toString());
                 } else {
                     showToast("Load data error");
                     tvConvertResult.setText("");
