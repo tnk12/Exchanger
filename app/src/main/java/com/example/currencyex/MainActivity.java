@@ -1,6 +1,7 @@
 package com.example.currencyex;
 
-import android.graphics.Movie;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.currencyex.helpers.Parser;
@@ -20,43 +22,89 @@ import com.example.currencyex.network.Loader;
 import com.example.currencyex.network.OnDataReceived;
 import com.example.currencyex.utils.L;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
-    private TextView textView, tvConvertResult;
-    private List<Movie> list = new ArrayList<>();
+    private TextView tvConvertResult;
+    EditText editText;
+    ActionBar actionBar;
+    Double convertResultPOJO;
+    Spinner spinnerFrom;
+    Spinner spinnerTo;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Changing toolbar background
+        actionBar = getSupportActionBar();
+        actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#000000")));
+
         //Making spinnerFrom
-        final Spinner spinnerFrom = findViewById(R.id.spinner_from);
+        spinnerFrom = findViewById(R.id.spinner_from);
         final ArrayAdapter<CharSequence> spinnerAdapterFrom = ArrayAdapter.createFromResource(this, R.array.values, android.R.layout.simple_spinner_item);
         spinnerAdapterFrom.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerFrom.setAdapter(spinnerAdapterFrom);
+        spinnerFrom.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                int count = parent.getCount();
 
-        Spinner spinnerTo = findViewById(R.id.spinner_to);
-        ArrayAdapter<CharSequence> spinnerAdapterTo = ArrayAdapter.createFromResource(this, R.array.values, android.R.layout.simple_spinner_item);
+                List<String> list = new ArrayList<String>();
+                for (int i = 0; i < count; i++) {
+                    if (i == position) {
+                        continue;
+                    }
+                    list.add(parent.getItemAtPosition(i).toString());
+
+                    ArrayAdapter<CharSequence> spinnerAdapterTo = ArrayAdapter.createFromResource(MainActivity.this, R.array.values, android.R.layout.simple_spinner_item);
+                    spinnerAdapterTo.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spinnerTo.setAdapter(spinnerAdapterTo);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        //Making spinnerTo
+        spinnerTo = findViewById(R.id.spinner_to);
+        final ArrayAdapter<CharSequence> spinnerAdapterTo = ArrayAdapter.createFromResource(this, R.array.values, android.R.layout.simple_spinner_item);
         spinnerAdapterTo.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerTo.setAdapter(spinnerAdapterTo);
 
+        //Finding our elements
         tvConvertResult = findViewById(R.id.tv_convert_result);
+        editText = findViewById(R.id.editTextCurr);
 
         Button convertButton = findViewById(R.id.button_convert);
         convertButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String currencyFrom = (String) spinnerFrom.getSelectedItem();
-                Log.d(L.D0, currencyFrom);
-                runConvert("USD", "UAH", 10);
+                if ((editText.length() > 0) &&
+                        (!spinnerFrom.getSelectedItem().toString().equals(spinnerTo.getSelectedItem().toString()))) {
+                    String currencyFrom = (String) spinnerFrom.getSelectedItem();
+                    Log.d(L.D0, currencyFrom);
+
+                    String currencyTo = (String) spinnerTo.getSelectedItem();
+                    Log.d(L.D0, currencyTo);
+
+                    runConvert(spinnerFrom.getSelectedItem().toString(), spinnerTo.getSelectedItem().toString(), editText.getText().toString());
+
+                } else {
+                    tvConvertResult.setText("");
+                    showToast("Error!");
+                }
             }
         });
     }
 
-    private void getCurrencysList() {
+    private void getCurrenciesList() {
         Loader.loadCurrencyNameList(new OnDataReceived() {
             @Override
             public void onDataReceived(String result) {
@@ -70,16 +118,24 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void runConvert(String currencyFrom, String currencyTo, int amount) {
-        Loader.loadConvertedData("USD", "UAH", "10", new OnDataReceived() {
+    public void runConvert(String currencyFrom, String currencyTo, String amount) {
+        Spinner spinnerFrom = findViewById(R.id.spinner_from);
+        final Spinner spinnerTo = findViewById(R.id.spinner_to);
+        final EditText editText = findViewById(R.id.editTextCurr);
+        Loader.loadConvertedData(spinnerFrom.getSelectedItem().toString(), spinnerTo.getSelectedItem().toString(), editText.getText().toString(), new OnDataReceived() {
             @Override
             public void onDataReceived(String result) {
                 Log.d(L.D0, "loadConvertedData: " + result);
-                if (result != null) {
+                if (result != null & editText.length() > 0) {
                     ConvertResultPOJO convertResultPOJO = Parser.parseConvertResult(result);
-                    tvConvertResult.setText(convertResultPOJO.getResult().toString());
+
+                    double test = convertResultPOJO.getResult();
+                    DecimalFormat df = new DecimalFormat("#");
+                    df.setMaximumFractionDigits(0);
+                    tvConvertResult.setText(df.format(test) + " - " + spinnerTo.getSelectedItem().toString());
                 } else {
                     showToast("Load data error");
+                    tvConvertResult.setText("");
                 }
             }
 

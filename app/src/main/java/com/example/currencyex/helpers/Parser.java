@@ -1,16 +1,13 @@
 package com.example.currencyex.helpers;
 
 import android.util.Log;
-
 import com.example.currencyex.model.ConvertResultPOJO;
 import com.example.currencyex.utils.L;
-import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 
+//Making our POJO parser
 public class Parser {
 
     public static ConvertResultPOJO parseConvertResult(String dataToConvert) {
