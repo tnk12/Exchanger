@@ -31,13 +31,16 @@ public class MainActivity extends AppCompatActivity {
     private TextView tvConvertResult;
     EditText editText;
     ActionBar actionBar;
-    Double convertResultPOJO;
     Spinner spinnerFrom;
     Spinner spinnerTo;
+    private ArrayList<CountryItem> mCountryList;
+    private CountryAdapter mAdapter;
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        initList();
 
         //Changing toolbar background
         actionBar = getSupportActionBar();
@@ -45,12 +48,20 @@ public class MainActivity extends AppCompatActivity {
 
         //Making spinnerFrom
         spinnerFrom = findViewById(R.id.spinner_from);
-        final ArrayAdapter<CharSequence> spinnerAdapterFrom = ArrayAdapter.createFromResource(this, R.array.values, android.R.layout.simple_spinner_item);
-        spinnerAdapterFrom.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerFrom.setAdapter(spinnerAdapterFrom);
+        mAdapter = new CountryAdapter(this,mCountryList);
+        spinnerFrom.setAdapter(mAdapter);
+
+
+
+
         spinnerFrom.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                CountryItem clickedItem = (CountryItem) parent.getItemAtPosition(position);
+                String clickedCountryName = clickedItem.getCountryName();
+                Toast.makeText(MainActivity.this,clickedCountryName, Toast.LENGTH_SHORT).show();
+
                 int count = parent.getCount();
 
                 List<String> list = new ArrayList<String>();
@@ -72,11 +83,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //Making spinnerTo
-        spinnerTo = findViewById(R.id.spinner_to);
-        final ArrayAdapter<CharSequence> spinnerAdapterTo = ArrayAdapter.createFromResource(this, R.array.values, android.R.layout.simple_spinner_item);
-        spinnerAdapterTo.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerTo.setAdapter(spinnerAdapterTo);
+        //Making Spinner To
 
         //Finding our elements
         tvConvertResult = findViewById(R.id.tv_convert_result);
@@ -103,6 +110,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+    private void initList(){
+        mCountryList = new ArrayList<>();
+        mCountryList.add(new CountryItem("USD",R.drawable.usd));
+        mCountryList.add(new CountryItem("UAH",R.drawable.uah));
+
+    }
+
 
     private void getCurrenciesList() {
         Loader.loadCurrencyNameList(new OnDataReceived() {
@@ -129,9 +143,9 @@ public class MainActivity extends AppCompatActivity {
                 if (result != null & editText.length() > 0) {
                     ConvertResultPOJO convertResultPOJO = Parser.parseConvertResult(result);
 
-                    double test = convertResultPOJO.getResult();
+                    float test = convertResultPOJO.getResult();
                     DecimalFormat df = new DecimalFormat("#");
-                    df.setMaximumFractionDigits(0);
+                    df.setMaximumFractionDigits(2);
                     tvConvertResult.setText(df.format(test) + " - " + spinnerTo.getSelectedItem().toString());
                 } else {
                     showToast("Load data error");
