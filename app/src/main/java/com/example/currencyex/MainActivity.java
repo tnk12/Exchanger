@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     EditText editText;
     ActionBar actionBar;
     Spinner spinnerFrom;
+    ImageView imageView2;
     Spinner spinnerTo;
     private ArrayList<CountryItem> mCountryList;
     private CountryAdapter mAdapter;
@@ -41,6 +43,20 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initList();
+        //adding ImageView
+        imageView2 = findViewById(R.id.imageView2);
+        imageView2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               int c = spinnerFrom.getSelectedItemPosition();
+               int d = spinnerTo.getSelectedItemPosition();
+
+               spinnerFrom.setSelection(d);
+               spinnerTo.setSelection(c);
+
+
+            }
+        });
 
         //Changing toolbar background
         actionBar = getSupportActionBar();
@@ -58,9 +74,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                CountryItem clickedItem = (CountryItem) parent.getItemAtPosition(position);
-                String clickedCountryName = clickedItem.getCountryName();
-                Toast.makeText(MainActivity.this,clickedCountryName, Toast.LENGTH_SHORT).show();
 
                 int count = parent.getCount();
 
@@ -71,9 +84,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                     list.add(parent.getItemAtPosition(i).toString());
 
-                    ArrayAdapter<CharSequence> spinnerAdapterTo = ArrayAdapter.createFromResource(MainActivity.this, R.array.values, android.R.layout.simple_spinner_item);
-                    spinnerAdapterTo.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    spinnerTo.setAdapter(spinnerAdapterTo);
+
                 }
             }
 
@@ -84,6 +95,9 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //Making Spinner To
+        spinnerTo = findViewById(R.id.spinner_to);
+        mAdapter = new CountryAdapter(this,mCountryList);
+        spinnerTo.setAdapter(mAdapter);
 
         //Finding our elements
         tvConvertResult = findViewById(R.id.tv_convert_result);
@@ -93,8 +107,7 @@ public class MainActivity extends AppCompatActivity {
         convertButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if ((editText.length() > 0) &&
-                        (!spinnerFrom.getSelectedItem().toString().equals(spinnerTo.getSelectedItem().toString()))) {
+                if ((editText.length() > 0) && (!spinnerFrom.getSelectedItem().toString().equals(spinnerTo.getSelectedItem().toString()))) {
                     String currencyFrom = (String) spinnerFrom.getSelectedItem();
                     Log.d(L.D0, currencyFrom);
 
@@ -114,6 +127,9 @@ public class MainActivity extends AppCompatActivity {
         mCountryList = new ArrayList<>();
         mCountryList.add(new CountryItem("USD",R.drawable.usd));
         mCountryList.add(new CountryItem("UAH",R.drawable.uah));
+        mCountryList.add(new CountryItem("EUR",R.drawable.eur));
+        mCountryList.add(new CountryItem("CNY",R.drawable.cny));
+        mCountryList.add(new CountryItem("CAD",R.drawable.cad));
 
     }
 

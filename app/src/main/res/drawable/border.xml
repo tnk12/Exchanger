@@ -7,7 +7,7 @@
         </shape>
     </item>
 
-    <item android:gravity="center_vertical|right" android:right="8dp">
+    <item android:gravity="center_vertical|right" android:right="5dp">
         <layer-list>
             <item android:width="12dp" android:height="12dp" android:gravity="center" android:bottom="10dp">
                 <rotate
