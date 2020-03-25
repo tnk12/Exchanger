@@ -58,6 +58,33 @@ public class Loader {
             public void onFailure(@NotNull Call call, @NotNull IOException e) {
                 result.onFail(e);
             }
+                    });
+
+                    }
+
+    public static void loadConvertedDate(final OnDataReceived date){
+        OkHttpClient client = new OkHttpClient();
+
+        Request request = new Request.Builder()
+                .url("https://fixer-fixer-currency-v1.p.rapidapi.com/2013-12-24")
+                .get()
+                .addHeader("x-rapidapi-host", "fixer-fixer-currency-v1.p.rapidapi.com")
+                .addHeader("x-rapidapi-key", "2197c111c8mshb525c66246e5404p1ccf07jsnc4c5fe51c929")
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+               date.onFail(e);
+            }
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                date.onDataReceived(response.body().string());
+            }
         });
+
+
+
     }
-}
+                    }

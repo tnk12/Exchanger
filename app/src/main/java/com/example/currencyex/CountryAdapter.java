@@ -45,6 +45,8 @@ public class CountryAdapter extends ArrayAdapter<CountryItem> {
         if(currentItem != null) {
             imageViewFlag.setImageResource(currentItem.getFlagImage());
             textViewName.setText(currentItem.getCountryName());
+
+
         }
         return convertView;
     }

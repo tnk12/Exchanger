@@ -3,14 +3,16 @@ package com.example.currencyex;
 public class CountryItem {
 
     private String mCountryName;
-    private int mFlagImage;
+    public int mFlagImage;
+    private String mCountryDescription;
 
 
 
-    public CountryItem(String countryName, int countryImage){
+    public CountryItem(String countryName, int countryImage, String countryDescription){
 
        mCountryName = countryName;
        mFlagImage = countryImage;
+       mCountryDescription = countryDescription;
 
     }
 
@@ -22,4 +24,10 @@ public class CountryItem {
 
         return mFlagImage;
     }
+
+    public String getCountryDescription(){
+
+        return mCountryDescription;
+    }
+
 }
