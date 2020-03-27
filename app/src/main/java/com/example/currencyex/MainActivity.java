@@ -30,6 +30,11 @@ import com.example.currencyex.model.ConvertResultPOJO;
 import com.example.currencyex.network.Loader;
 import com.example.currencyex.network.OnDataReceived;
 import com.example.currencyex.utils.L;
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
 import java.text.DateFormat;
 import java.text.DecimalFormat;
@@ -53,11 +58,50 @@ public class MainActivity extends AppCompatActivity {
     TextView textViewConvertFrom, textViewConvertTo, textViewDate,textView1From,textView1To;
     private ArrayList<CountryItem> mCountryList;
     private CountryAdapter mAdapter;
+    private LineChart mChart;
 
 
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mChart = findViewById(R.id.linechart);
+
+
+        mChart.setDragEnabled(true);
+        mChart.setScaleEnabled(false);
+
+        ArrayList<Entry> yValues = new ArrayList<>();
+
+        int s3 = 28;
+        String country = "Dollar";
+
+
+        yValues.add(new Entry((float) 1,60f));
+        yValues.add(new Entry((float) 2,50f));
+        yValues.add(new Entry((float) 3,40f));
+        yValues.add(new Entry((float) 4,30f));
+        yValues.add(new Entry((float) 5,20f));
+        yValues.add(new Entry((float) 6,10f));
+        yValues.add(new Entry((float) 7,5f));
+        yValues.add(new Entry((float) 8,s3));
+
+
+        LineDataSet set1 = new LineDataSet(yValues, country);
+
+        set1.setFillAlpha(110);
+        set1.setColor(Color.RED);
+        set1.setCircleColor(Color.BLACK);
+        set1.setValueTextSize(12f);
+        set1.setLineWidth(3f);
+
+        ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+        dataSets.add(set1);
+
+        LineData data = new LineData(dataSets);
+
+        mChart.setData(data);
+
         textViewConvertFrom = findViewById(R.id.textViewConvertFrom);
         textViewConvertTo = findViewById(R.id.textViewConvertTo);
         textViewDate = findViewById(R.id.textViewDate);
@@ -441,7 +485,7 @@ public class MainActivity extends AppCompatActivity {
 
                     float test = convertResultPOJO.getResult();
                     DecimalFormat df = new DecimalFormat("#");
-                    df.setMaximumFractionDigits(2);
+                    df.setMaximumFractionDigits(3);
                     tvConvertResult.setText(df.format(test));
                 } else {
                     showToast("Load data error");
@@ -468,7 +512,7 @@ public class MainActivity extends AppCompatActivity {
 
                     float test = convertResultPOJO.getResult();
                     DecimalFormat df = new DecimalFormat("#");
-                    df.setMaximumFractionDigits(2);
+                    df.setMaximumFractionDigits(3);
                     textView1From.setText("1 "+currencyFrom+" = "+df.format(test)+"\b"+ currencyTo);
                 } else {
                     showToast("Load data error");
@@ -495,7 +539,7 @@ public class MainActivity extends AppCompatActivity {
 
                     float test = convertResultPOJO.getResult();
                     DecimalFormat df = new DecimalFormat("#");
-                    df.setMaximumFractionDigits(2);
+                    df.setMaximumFractionDigits(3);
                     textView1To.setText("1 "+currencyFrom2+" = "+df.format(test)+"\b"+ currencyTo2);
                 } else {
                     showToast("Load data error");
