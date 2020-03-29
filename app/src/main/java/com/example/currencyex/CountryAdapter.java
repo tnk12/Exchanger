@@ -11,11 +11,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class CountryAdapter extends ArrayAdapter<CountryItem> {
 
-    public CountryAdapter(Context context, ArrayList<CountryItem> countryList){
+    public CountryAdapter(Context context, List<CountryItem> countryList){
         super(context, 0 ,countryList);
     }
 

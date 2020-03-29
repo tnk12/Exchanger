@@ -4,16 +4,11 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import com.example.currencyex.CountryItem;
-
-import android.os.Looper;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -21,7 +16,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -40,7 +34,6 @@ import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -55,18 +48,16 @@ public class MainActivity extends AppCompatActivity {
     Spinner spinnerFrom;
     ImageView imageView2;
     Spinner spinnerTo;
-    TextView textViewConvertFrom, textViewConvertTo, textViewDate,textView1From,textView1To;
-    private ArrayList<CountryItem> mCountryList;
+    TextView textViewConvertFrom, textViewConvertTo, textViewDate, textView1From, textView1To;
+    private List<CountryItem> mCountryList = new ArrayList<>();
     private CountryAdapter mAdapter;
     private LineChart mChart;
-
 
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         mChart = findViewById(R.id.linechart);
-
 
         mChart.setDragEnabled(true);
         mChart.setScaleEnabled(false);
@@ -76,16 +67,14 @@ public class MainActivity extends AppCompatActivity {
         int s3 = 28;
         String country = "Dollar";
 
-
-        yValues.add(new Entry((float) 1,60f));
-        yValues.add(new Entry((float) 2,50f));
-        yValues.add(new Entry((float) 3,40f));
-        yValues.add(new Entry((float) 4,30f));
-        yValues.add(new Entry((float) 5,20f));
-        yValues.add(new Entry((float) 6,10f));
-        yValues.add(new Entry((float) 7,5f));
-        yValues.add(new Entry((float) 8,s3));
-
+        yValues.add(new Entry((float) 1, 60f));
+        yValues.add(new Entry((float) 2, 50f));
+        yValues.add(new Entry((float) 3, 40f));
+        yValues.add(new Entry((float) 4, 30f));
+        yValues.add(new Entry((float) 5, 20f));
+        yValues.add(new Entry((float) 6, 10f));
+        yValues.add(new Entry((float) 7, 5f));
+        yValues.add(new Entry((float) 8, s3));
 
         LineDataSet set1 = new LineDataSet(yValues, country);
 
@@ -110,18 +99,17 @@ public class MainActivity extends AppCompatActivity {
         DateFormat timeFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
         final String timeText = timeFormat.format(currentDate);
 
-        textViewDate.setText("Today "+timeText);
+        textViewDate.setText("Today " + timeText);
 
-
-
-        initList();
+        initList(mCountryList);
         //adding ImageView
-        imageView2 = findViewById(R.id.imageView2);
+        imageView2 = findViewById(R.id.change_currencis);
         imageView2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int c = spinnerFrom.getSelectedItemPosition();
                 int d = spinnerTo.getSelectedItemPosition();
+
                 spinnerFrom.setSelection(d);
                 spinnerTo.setSelection(c);
 
@@ -130,17 +118,17 @@ public class MainActivity extends AppCompatActivity {
                 String amount = editText.getText().toString();
 
                 runConvert(currencyFrom, currencyTo, amount);
-                runConvert2(currencyFrom,currencyTo,"1");
+                runConvert2(currencyFrom, currencyTo, "1");
                 String currencyFrom2 = ((CountryItem) spinnerTo.getSelectedItem()).getCountryName();
                 String currencyTo2 = ((CountryItem) spinnerFrom.getSelectedItem()).getCountryName();
 
-                runConvert3(currencyFrom2,currencyTo2,"1");
+                runConvert3(currencyFrom2, currencyTo2, "1");
 
                 Date currentDate = new Date();
                 DateFormat timeFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
                 String timeText = timeFormat.format(currentDate);
 
-                textViewDate.setText("Today "+timeText);
+                textViewDate.setText("Today " + timeText);
             }
         });
 
@@ -167,22 +155,18 @@ public class MainActivity extends AppCompatActivity {
                 String amount = editText.getText().toString();
 
                 runConvert(currencyFrom, currencyTo, amount);
-                runConvert2(currencyFrom,currencyTo,"1");
+                runConvert2(currencyFrom, currencyTo, "1");
 
-               String currencyFrom2 = ((CountryItem) spinnerTo.getSelectedItem()).getCountryName();
-               String currencyTo2 = ((CountryItem) spinnerFrom.getSelectedItem()).getCountryName();
+                String currencyFrom2 = ((CountryItem) spinnerTo.getSelectedItem()).getCountryName();
+                String currencyTo2 = ((CountryItem) spinnerFrom.getSelectedItem()).getCountryName();
 
-                runConvert3(currencyFrom2,currencyTo2,"1");
+                runConvert3(currencyFrom2, currencyTo2, "1");
 
                 Date currentDate = new Date();
                 DateFormat timeFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
                 String timeText = timeFormat.format(currentDate);
 
-                textViewDate.setText("Today "+timeText);
-
-
-
-
+                textViewDate.setText("Today " + timeText);
             }
 
             @Override
@@ -190,7 +174,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
 
         //Making Spinner To
         spinnerTo = findViewById(R.id.spinner_to);
@@ -214,19 +197,16 @@ public class MainActivity extends AppCompatActivity {
                 String amount = editText.getText().toString();
 
                 runConvert(currencyFrom, currencyTo, amount);
-                runConvert2(currencyFrom,currencyTo,"1");
+                runConvert2(currencyFrom, currencyTo, "1");
                 String currencyFrom2 = ((CountryItem) spinnerTo.getSelectedItem()).getCountryName();
                 String currencyTo2 = ((CountryItem) spinnerFrom.getSelectedItem()).getCountryName();
 
-                runConvert3(currencyFrom2,currencyTo2,"1");
+                runConvert3(currencyFrom2, currencyTo2, "1");
 
                 Date currentDate = new Date();
                 DateFormat timeFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
                 String timeText = timeFormat.format(currentDate);
-
-                textViewDate.setText("Today "+timeText);
-
-
+                textViewDate.setText("Today " + timeText);
             }
 
             @Override
@@ -257,18 +237,16 @@ public class MainActivity extends AppCompatActivity {
                 String amount = editText.getText().toString();
 
                 runConvert(currencyFrom, currencyTo, amount);
-                runConvert2(currencyFrom,currencyTo,"1");
+                runConvert2(currencyFrom, currencyTo, "1");
                 String currencyFrom2 = ((CountryItem) spinnerTo.getSelectedItem()).getCountryName();
                 String currencyTo2 = ((CountryItem) spinnerFrom.getSelectedItem()).getCountryName();
 
-                runConvert3(currencyFrom2,currencyTo2,"1");
+                runConvert3(currencyFrom2, currencyTo2, "1");
 
                 Date currentDate = new Date();
                 DateFormat timeFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
                 String timeText = timeFormat.format(currentDate);
-
-                textViewDate.setText("Today "+timeText);
-
+                textViewDate.setText("Today " + timeText);
             }
 
             @Override
@@ -283,6 +261,7 @@ public class MainActivity extends AppCompatActivity {
         btnShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 String currencyFrom = ((CountryItem) spinnerFrom.getSelectedItem()).getCountryName();
                 String currencyTo = ((CountryItem) spinnerTo.getSelectedItem()).getCountryName();
                 String amount = editText.getText().toString();
@@ -290,25 +269,107 @@ public class MainActivity extends AppCompatActivity {
                 String currency1FromText = textView1From.getText().toString();
                 String currency1ToText = textView1To.getText().toString();
 
-
-                String share = ("Currency rate for Today "+timeText+" :"+"\n"+currency1FromText+"\n"+currency1ToText+"\n"+ amount+"\b"+ currencyFrom + " = " + result +"\b"+ currencyTo);
+                String share = ("Currency rate for Today " + timeText + " :" + "\n" + currency1FromText + "\n" + currency1ToText + "\n" + amount + "\b" + currencyFrom + " = " + result + "\b" + currencyTo);
                 Intent shareIntent = new Intent(Intent.ACTION_SEND);
                 shareIntent.setType("text/plain");
                 String shareBody = share;
                 String shareSub = share;
                 shareIntent.putExtra(Intent.EXTRA_SUBJECT, shareBody);
                 startActivity(Intent.createChooser(shareIntent, "Share Using"));
-
-
             }
         });
-
-
     }
 
+    public void runConvert(final String currencyFrom, final String currencyTo, String amount) {
 
-    private void initList() {
-        mCountryList = new ArrayList<>();
+        Loader.loadConvertedData(currencyFrom, currencyTo, amount, new OnDataReceived() {
+            @Override
+            public void onDataReceived(String result) {
+                Log.d(L.D0, "loadConvertedData: " + result);
+
+                if (result != null && editText.length() > 0) {
+                    ConvertResultPOJO convertResultPOJO = Parser.parseConvertResult(result);
+
+                    float test = convertResultPOJO.getResult();
+                    DecimalFormat df = new DecimalFormat("#");
+                    df.setMaximumFractionDigits(3);
+                    tvConvertResult.setText(df.format(test));
+                } else {
+                    showToast("Load data error");
+                    tvConvertResult.setText("");
+                }
+            }
+
+            @Override
+            public void onFail(Exception e) {
+                showToast(e.getLocalizedMessage());
+                Log.d(L.D0, "onFail: " + e.getMessage());
+            }
+        });
+    }
+
+    public void runConvert2(final String currencyFrom, final String currencyTo, String amount) {
+
+        Loader.loadConvertedData(currencyFrom, currencyTo, amount, new OnDataReceived() {
+            @Override
+            public void onDataReceived(String result) {
+                Log.d(L.D0, "loadConvertedData: " + result);
+
+                if (result != null && editText.length() > 0) {
+                    ConvertResultPOJO convertResultPOJO = Parser.parseConvertResult(result);
+
+                    float test = convertResultPOJO.getResult();
+                    DecimalFormat df = new DecimalFormat("#");
+                    df.setMaximumFractionDigits(3);
+                    textView1From.setText("1 " + currencyFrom + " = " + df.format(test) + "\b" + currencyTo);
+                } else {
+                    showToast("Load data error");
+                    textView1From.setText("");
+                }
+            }
+
+            @Override
+            public void onFail(Exception e) {
+                showToast(e.getLocalizedMessage());
+                Log.d(L.D0, "onFail: " + e.getMessage());
+            }
+        });
+    }
+
+    public void runConvert3(final String currencyFrom2, final String currencyTo2, String amount) {
+
+        Loader.loadConvertedData(currencyFrom2, currencyTo2, amount, new OnDataReceived() {
+            @Override
+            public void onDataReceived(String result) {
+                Log.d(L.D0, "loadConvertedData: " + result);
+
+                if (result != null && editText.length() > 0) {
+                    ConvertResultPOJO convertResultPOJO = Parser.parseConvertResult(result);
+
+                    float test = convertResultPOJO.getResult();
+                    DecimalFormat df = new DecimalFormat("#");
+                    df.setMaximumFractionDigits(3);
+                    textView1To.setText("1 " + currencyFrom2 + " = " + df.format(test) + "\b" + currencyTo2);
+                } else {
+                    showToast("Load data error");
+                    textView1To.setText("");
+                }
+            }
+
+            @Override
+            public void onFail(Exception e) {
+                showToast(e.getLocalizedMessage());
+                Log.d(L.D0, "onFail: " + e.getMessage());
+            }
+        });
+    }
+
+    private void showToast(String message) {
+        Toast.makeText(MainActivity.this, message, Toast.LENGTH_LONG).show();
+    }
+
+    private List<CountryItem> initList(List<CountryItem> mCountryList) {
+
         mCountryList.add(new CountryItem("USD", R.drawable.usd, "US Dollar"));
         mCountryList.add(new CountryItem("UAH", R.drawable.uah, "Ukrainian Hrivnya"));
         mCountryList.add(new CountryItem("EUR", R.drawable.eur, "Euro"));
@@ -456,115 +517,7 @@ public class MainActivity extends AppCompatActivity {
         mCountryList.add(new CountryItem("ZAR", R.drawable.zar, "South African Rand"));
         mCountryList.add(new CountryItem("ZMK", R.drawable.zmk, "Zambian Kwacha"));
         mCountryList.add(new CountryItem("ZWL", R.drawable.zwl, "Zimbabwean Dollar"));
+
+        return mCountryList;
     }
-
-    private void getCurrenciesList() {
-        Loader.loadCurrencyNameList(new OnDataReceived() {
-            @Override
-            public void onDataReceived(String result) {
-                Log.d(L.D0, "loadCurrencyNameList: " + result);
-            }
-
-            @Override
-            public void onFail(Exception e) {
-                Log.d(L.D0, "onFail: " + e.getMessage());
-            }
-        });
-    }
-
-
-    public void runConvert(final String currencyFrom, final String currencyTo, String amount) {
-
-        Loader.loadConvertedData(currencyFrom, currencyTo, amount, new OnDataReceived() {
-            @Override
-            public void onDataReceived(String result) {
-                Log.d(L.D0, "loadConvertedData: " + result);
-
-                if (result != null && editText.length() > 0) {
-                    ConvertResultPOJO convertResultPOJO = Parser.parseConvertResult(result);
-
-                    float test = convertResultPOJO.getResult();
-                    DecimalFormat df = new DecimalFormat("#");
-                    df.setMaximumFractionDigits(3);
-                    tvConvertResult.setText(df.format(test));
-                } else {
-                    showToast("Load data error");
-                    tvConvertResult.setText("");
-                }
-            }
-
-            @Override
-            public void onFail(Exception e) {
-                showToast(e.getLocalizedMessage());
-                Log.d(L.D0, "onFail: " + e.getMessage());
-            }
-        });
-    }
-    public void runConvert2(final String currencyFrom, final String currencyTo, String amount) {
-
-        Loader.loadConvertedData(currencyFrom, currencyTo, amount, new OnDataReceived() {
-            @Override
-            public void onDataReceived(String result) {
-                Log.d(L.D0, "loadConvertedData: " + result);
-
-                if (result != null && editText.length() > 0) {
-                    ConvertResultPOJO convertResultPOJO = Parser.parseConvertResult(result);
-
-                    float test = convertResultPOJO.getResult();
-                    DecimalFormat df = new DecimalFormat("#");
-                    df.setMaximumFractionDigits(3);
-                    textView1From.setText("1 "+currencyFrom+" = "+df.format(test)+"\b"+ currencyTo);
-                } else {
-                    showToast("Load data error");
-                    textView1From.setText("");
-                }
-            }
-
-            @Override
-            public void onFail(Exception e) {
-                showToast(e.getLocalizedMessage());
-                Log.d(L.D0, "onFail: " + e.getMessage());
-            }
-        });
-    }
-    public void runConvert3(final String currencyFrom2, final String currencyTo2, String amount) {
-
-        Loader.loadConvertedData(currencyFrom2, currencyTo2, amount, new OnDataReceived() {
-            @Override
-            public void onDataReceived(String result) {
-                Log.d(L.D0, "loadConvertedData: " + result);
-
-                if (result != null && editText.length() > 0) {
-                    ConvertResultPOJO convertResultPOJO = Parser.parseConvertResult(result);
-
-                    float test = convertResultPOJO.getResult();
-                    DecimalFormat df = new DecimalFormat("#");
-                    df.setMaximumFractionDigits(3);
-                    textView1To.setText("1 "+currencyFrom2+" = "+df.format(test)+"\b"+ currencyTo2);
-                } else {
-                    showToast("Load data error");
-                    textView1To.setText("");
-                }
-            }
-
-            @Override
-            public void onFail(Exception e) {
-                showToast(e.getLocalizedMessage());
-                Log.d(L.D0, "onFail: " + e.getMessage());
-            }
-        });
-    }
-
-
-
-
-
-
-
-
-    private void showToast(String message) {
-                Toast.makeText(MainActivity.this, message, Toast.LENGTH_LONG).show();
-            }
-
-
-    }
+}
