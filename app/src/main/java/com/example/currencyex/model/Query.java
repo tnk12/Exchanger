@@ -4,7 +4,7 @@ public class Query {
 
     private String from;
     private String to;
-    private Long amount;
+    private float amount;
 
     public String getFrom() {
         return from;
@@ -22,7 +22,7 @@ public class Query {
         this.to = to;
     }
 
-    public Long getAmount() {
+    public float getAmount() {
         return amount;
     }
 

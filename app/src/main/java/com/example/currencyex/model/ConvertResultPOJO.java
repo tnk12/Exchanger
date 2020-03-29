@@ -1,15 +1,12 @@
 package com.example.currencyex.model;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-
 public class ConvertResultPOJO {
 
     private Boolean success;
     private Query query;
     private Info info;
     private String date;
-    private Double result;
+    private float result;
 
     //objects setters and getters
 
@@ -45,11 +42,11 @@ public class ConvertResultPOJO {
         this.date = date;
     }
 
-    public Double getResult() {
+    public float getResult() {
         return result;
     }
 
-    public void setResult(Double result) {
+    public void setResult(float result) {
         this.result = result;
     }
 

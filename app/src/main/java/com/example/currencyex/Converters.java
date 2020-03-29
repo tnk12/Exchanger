@@ -14,7 +14,6 @@ import java.util.List;
 
 public class Converters {
 
-
     public static List<Movie> convertJSonToList(String dataToConvert) {
         List<Movie> list = new ArrayList<>();
         try {

@@ -35,11 +35,9 @@
         <item name="Belize Dollar" translatable="false" type="string">BZD </item>
         <item name="Congolese Franc" translatable="false" type="string">CDF </item>
         <item name="Swiss Franc" translatable="false" type="string">CHF </item>
-        <item name="Chilean Unit of Account (UF)" translatable="false" type="string">CLF </item>
         <item name="Chilean Peso" translatable="false" type="string">CLP </item>
         <item name="Colombian Peso" translatable="false" type="string">COP </item>
         <item name="Costa Rican Colón" translatable="false" type="string">CRC </item>
-        <item name="Cuban Convertible Peso" translatable="false" type="string">CUC </item>
         <item name="Cuban Peso" translatable="false" type="string">CUP </item>
         <item name="Cape Verdean Escudo" translatable="false" type="string">CVE </item>
         <item name="Czech Republic Koruna" translatable="false" type="string">CZK </item>
@@ -68,12 +66,10 @@
         <item name="Hungarian Forint" translatable="false" type="string">HUF </item>
         <item name="Indonesian Rupiah" translatable="false" type="string">IDR </item>
         <item name="Israeli New Sheqel" translatable="false" type="string">ILS </item>
-        <item name="Manx pound" translatable="false" type="string">IMP </item>
         <item name="Indian Rupee" translatable="false" type="string">INR </item>
         <item name="Iraqi Dinar" translatable="false" type="string">IQD </item>
         <item name="Iranian Rial" translatable="false" type="string">IRR </item>
         <item name="Icelandic Króna" translatable="false" type="string">ISK </item>
-        <item name="Jersey Pound" translatable="false" type="string">JEP </item>
         <item name="Jamaican Dollar" translatable="false" type="string">JMD </item>
         <item name="Jordanian Dinar" translatable="false" type="string">JOD </item>
         <item name="Kenyan Shilling" translatable="false" type="string">KES </item>
@@ -83,7 +79,6 @@
         <item name="North Korean Won" translatable="false" type="string">KPW </item>
         <item name="South Korean Won" translatable="false" type="string">KRW </item>
         <item name="Kuwaiti Dinar" translatable="false" type="string">KWD </item>
-        <item name="Cayman Islands Dollar" translatable="false" type="string">KYD </item>
         <item name="Kazakhstani Tenge" translatable="false" type="string">KZT</item>
         <item name="Laotian Kip" translatable="false" type="string">LAK </item>
         <item name="Lebanese Pound" translatable="false" type="string">LBP </item>
@@ -96,16 +91,13 @@
         <item name="Moroccan Dirham" translatable="false" type="string">MAD </item>
         <item name="Moldovan Leu" translatable="false" type="string">MDL </item>
         <item name="Malagasy Ariary" translatable="false" type="string">MGA </item>
-        <item name="Macedonian Denar" translatable="false" type="string">MKD </item>
         <item name="Myanma Kyat" translatable="false" type="string">MMK </item>
         <item name="Mongolian Tugrik" translatable="false" type="string">MNT </item>
-        <item name="Macanese Pataca" translatable="false" type="string">MOP </item>
         <item name="Mauritanian Ouguiya" translatable="false" type="string">MRO </item>
         <item name="Mauritian Rupee" translatable="false" type="string">MUR </item>
         <item name="Maldivian Rufiyaa" translatable="false" type="string">MVR </item>
         <item name="Malawian Kwacha" translatable="false" type="string">MWK </item>
         <item name="Mexican Peso" translatable="false" type="string">MXN </item>
-        <item name="Malaysian Ringgit" translatable="false" type="string">MYR </item>
         <item name="Mozambican Metical" translatable="false" type="string">MZN </item>
         <item name="Namibian Dollar" translatable="false" type="string">NAD </item>
         <item name="Nigerian Naira" translatable="false" type="string">NGN</item>
@@ -126,19 +118,16 @@
         <item name="Serbian Dinar" translatable="false" type="string">RSD </item>
         <item name="Rwandan Franc" translatable="false" type="string">RWF </item>
         <item name="Saudi Riyal" translatable="false" type="string">SAR </item>
-        <item name="Solomon Islands Dollar" translatable="false" type="string">SCR </item>
         <item name="Seychellois Rupee" translatable="false" type="string">SCCR </item>
         <item name="Sudanese Pound" translatable="false" type="string">SDG </item>
         <item name="Swedish Krona" translatable="false" type="string">SEK </item>
         <item name="Singapore Dollar" translatable="false" type="string">SGD </item>
-        <item name="Saint Helena Pound" translatable="false" type="string">SHP </item>
         <item name="Sierra Leonean Leone" translatable="false" type="string">SLL </item>
         <item name="Somali Shilling" translatable="false" type="string">SOS </item>
         <item name="Surinamese Dollar" translatable="false" type="string">SRD </item>
         <item name="São Tomé and Príncipe Dobra" translatable="false" type="string">STD </item>
         <item name="Salvadoran Colón" translatable="false" type="string">SVC </item>
         <item name="Syrian Pound" translatable="false" type="string">SYP </item>
-        <item name="Swazi Lilangeni" translatable="false" type="string">SZL </item>
         <item name="Thai Baht" translatable="false" type="string">THB </item>
         <item name="Tajikistani Somoni" translatable="false" type="string">TJS </item>
         <item name="Turkmenistani Manat" translatable="false" type="string">TMT </item>
@@ -155,18 +144,9 @@
         <item name="Vietnamese Dong" translatable="false" type="string">VND </item>
         <item name="Vanuatu Vatu" translatable="false" type="string">VUV </item>
         <item name="Samoan Tala" translatable="false" type="string">WST </item>
-        <item name="CFA Franc BEAC" translatable="false" type="string">XAF </item>
-        <item name="East Caribbean Dollar" translatable="false" type="string">XCD </item>
-        <item name="Special Drawing Rights" translatable="false" type="string">XDR </item>
-        <item name="SCFA Franc BCEAO" translatable="false" type="string">XOF </item>
-        <item name="CFP Franc" translatable="false" type="string">XPF </item>
         <item name="Yemeni Rial" translatable="false" type="string">YER </item>
         <item name="South African Rand" translatable="false" type="string">ZAR </item>
         <item name="Zambian Kwacha (pre-2013)" translatable="false" type="string">ZMK </item>
         <item name="Zimbabwean Dollar" translatable="false" type="string">ZWL </item>
-
-
     </string-array>
-
-
 </resources>

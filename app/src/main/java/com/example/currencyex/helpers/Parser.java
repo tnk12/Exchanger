@@ -22,4 +22,20 @@ public class Parser {
 
         return result;
     }
+
+    public static  ConvertResultPOJO parseDate(String dataToConvert){
+
+        ConvertResultPOJO date = null;
+
+        try{
+            Type dataType = new TypeToken<ConvertResultPOJO>(){
+            }.getType();
+            date = new GsonBuilder().create().fromJson(dataToConvert, dataType);
+
+        }catch (Exception e){
+            Log.e(L.D0, e.toString());
+
+        }
+        return date;
+    }
 }
