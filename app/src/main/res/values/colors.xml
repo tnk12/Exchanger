@@ -8,4 +8,7 @@
     <color name="blue">#1636D8</color>
     <color name="white">#FFFFFF</color>
     <color name="red">#E13333</color>
+    <color name="Background">#f9f9fa</color>
+    <color name="TextSubtitle">#4e4e4e</color>
+    <color name="TextTitle">#262626</color>
 </resources>

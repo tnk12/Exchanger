@@ -15,28 +15,37 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+
+import java.util.ArrayList;
+import java.util.List;
+
+
+import androidx.appcompat.app.ActionBar;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.currencyex.api.ApiClient;
+import com.example.currencyex.api.ApiInterface;
 import com.example.currencyex.helpers.Parser;
 import com.example.currencyex.model.ConvertResultPOJO;
+import com.example.currencyex.models.Article;
+import com.example.currencyex.models.News;
 import com.example.currencyex.network.Loader;
 import com.example.currencyex.network.OnDataReceived;
 import com.example.currencyex.utils.L;
-import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -46,50 +55,34 @@ public class MainActivity extends AppCompatActivity {
     ActionBar actionBar;
     ImageButton btnShare;
     Spinner spinnerFrom;
+    private String TAG = MainActivity.class.getSimpleName();
+
+    public static final String API_KEY = "a46785213dc24f14ac6bcab6e4458166";
+    private RecyclerView recyclerView;
+    private RecyclerView.LayoutManager layoutManager;
+    private List<Article> articles = new ArrayList<>();
+    private Adapter adapter;
+
     ImageView imageView2;
     Spinner spinnerTo;
     TextView textViewConvertFrom, textViewConvertTo, textViewDate, textView1From, textView1To;
     private List<CountryItem> mCountryList = new ArrayList<>();
     private CountryAdapter mAdapter;
-    private LineChart mChart;
+
 
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
+        recyclerView = findViewById(R.id.recyclerView);
+        layoutManager = new LinearLayoutManager(MainActivity.this);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setNestedScrollingEnabled(false);
 
-        mChart = findViewById(R.id.linechart);
+        LoadJson();
 
-        mChart.setDragEnabled(true);
-        mChart.setScaleEnabled(false);
 
-        ArrayList<Entry> yValues = new ArrayList<>();
-
-        int s3 = 28;
-        String country = "Dollar";
-
-        yValues.add(new Entry((float) 1, 60f));
-        yValues.add(new Entry((float) 2, 50f));
-        yValues.add(new Entry((float) 3, 40f));
-        yValues.add(new Entry((float) 4, 30f));
-        yValues.add(new Entry((float) 5, 20f));
-        yValues.add(new Entry((float) 6, 10f));
-        yValues.add(new Entry((float) 7, 5f));
-        yValues.add(new Entry((float) 8, s3));
-
-        LineDataSet set1 = new LineDataSet(yValues, country);
-
-        set1.setFillAlpha(110);
-        set1.setColor(Color.RED);
-        set1.setCircleColor(Color.BLACK);
-        set1.setValueTextSize(12f);
-        set1.setLineWidth(3f);
-
-        ArrayList<ILineDataSet> dataSets = new ArrayList<>();
-        dataSets.add(set1);
-
-        LineData data = new LineData(dataSets);
-
-        mChart.setData(data);
 
         textViewConvertFrom = findViewById(R.id.textViewConvertFrom);
         textViewConvertTo = findViewById(R.id.textViewConvertTo);
@@ -276,6 +269,36 @@ public class MainActivity extends AppCompatActivity {
                 String shareSub = share;
                 shareIntent.putExtra(Intent.EXTRA_SUBJECT, shareBody);
                 startActivity(Intent.createChooser(shareIntent, "Share Using"));
+            }
+        });
+    }
+    public void LoadJson() {
+        ApiInterface apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+        String country = Utils1.getCountry();
+
+        Call<News> call = apiInterface.getNews("currencies", "2020-03-31", "publishedAt", API_KEY);
+        call.enqueue(new Callback<News>() {
+            @Override
+            public void onResponse(Call<News> call, Response<News> response) {
+                Log.d(TAG, "response.body(): " + response.body().toString());
+                if (response.isSuccessful() && response.body().getArticle() != null) {
+                    if (!articles.isEmpty()) {
+                        articles.clear();
+                    }
+
+                    articles = response.body().getArticle();
+                    adapter = new Adapter(articles, MainActivity.this);
+                    recyclerView.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
+
+                } else {
+                    Toast.makeText(MainActivity.this, "No Result!", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<News> call, Throwable t) {
+                Log.e(TAG, t.getLocalizedMessage());
             }
         });
     }
@@ -520,4 +543,8 @@ public class MainActivity extends AppCompatActivity {
 
         return mCountryList;
     }
+
+
+
 }
+
