@@ -94,7 +94,6 @@ public class MainActivity extends AppCompatActivity {
         editText = findViewById(R.id.editTextCurr);
         textView1From = findViewById(R.id.textView1From);
         textView1To = findViewById(R.id.textView1To);
-        btnCalc = findViewById(R.id.btnCalc);
 
         LoadJson();
 
