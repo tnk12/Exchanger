@@ -30,7 +30,12 @@ import java.util.List;
 public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
     private List<Article> articles;
     private Context context;
-    private OnItemClickListener onItemClickListener;
+    private OnItemClickListener onItemClickListener =  new OnItemClickListener() {
+        @Override
+        public void onItemClick(View view, int position) {
+
+        }
+    };
 
     public Adapter(List<Article> articles, Context context) {
         this.articles = articles;

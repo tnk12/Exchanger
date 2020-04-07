@@ -1,0 +1,4 @@
+package values
+
+configurations.maybeCreate("default")
+artifacts.add("default", file('rhino-1.7.11.jar'))

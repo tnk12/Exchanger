@@ -26,6 +26,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.currencyex.api.ApiClient;
 import com.example.currencyex.api.ApiInterface;
@@ -49,20 +50,20 @@ import retrofit2.Response;
 
 
 public class MainActivity extends AppCompatActivity {
+
     private TextView tvConvertResult;
     TextView tvTextViewFrom, tvTextViewTo;
     EditText editText;
     ActionBar actionBar;
-    ImageButton btnShare;
+    ImageButton btnShare, btnCalc;
     Spinner spinnerFrom;
     private String TAG = MainActivity.class.getSimpleName();
-
     public static final String API_KEY = "a46785213dc24f14ac6bcab6e4458166";
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private List<Article> articles = new ArrayList<>();
     private Adapter adapter;
-
+    ImageView image;
     ImageView imageView2;
     Spinner spinnerTo;
     TextView textViewConvertFrom, textViewConvertTo, textViewDate, textView1From, textView1To;
@@ -73,30 +74,43 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        image = findViewById(R.id.image);
+
         setContentView(R.layout.activity_main);
+
         recyclerView = findViewById(R.id.recyclerView);
         layoutManager = new LinearLayoutManager(MainActivity.this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setNestedScrollingEnabled(false);
+        textViewConvertFrom = findViewById(R.id.textViewConvertFrom);
+        textViewConvertTo = findViewById(R.id.textViewConvertTo);
+        textViewDate = findViewById(R.id.textViewDate);
+        imageView2 = findViewById(R.id.change_currencis);
+        spinnerTo = findViewById(R.id.spinner_to);
+        tvTextViewTo = findViewById(R.id.textViewTo);
+        tvTextViewFrom = findViewById(R.id.textViewFrom);
+        tvConvertResult = findViewById(R.id.tv_convert_result);
+        editText = findViewById(R.id.editTextCurr);
+        textView1From = findViewById(R.id.textView1From);
+        textView1To = findViewById(R.id.textView1To);
+        btnCalc = findViewById(R.id.btnCalc);
 
         LoadJson();
 
 
-
-        textViewConvertFrom = findViewById(R.id.textViewConvertFrom);
-        textViewConvertTo = findViewById(R.id.textViewConvertTo);
-        textViewDate = findViewById(R.id.textViewDate);
-
+        //Date
         Date currentDate = new Date();
         DateFormat timeFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
         final String timeText = timeFormat.format(currentDate);
-
         textViewDate.setText("Today " + timeText);
 
+
         initList(mCountryList);
+
+
+
         //adding ImageView
-        imageView2 = findViewById(R.id.change_currencis);
         imageView2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,7 +124,12 @@ public class MainActivity extends AppCompatActivity {
                 String currencyTo = ((CountryItem) spinnerTo.getSelectedItem()).getCountryName();
                 String amount = editText.getText().toString();
 
-                runConvert(currencyFrom, currencyTo, amount);
+                if (editText.length() > 0) {
+                    runConvert(currencyFrom, currencyTo, amount);
+                }else {
+                    tvConvertResult.setText("");
+                    Toast.makeText(MainActivity.this,"Please,enter amount!",Toast.LENGTH_SHORT);
+                }
                 runConvert2(currencyFrom, currencyTo, "1");
                 String currencyFrom2 = ((CountryItem) spinnerTo.getSelectedItem()).getCountryName();
                 String currencyTo2 = ((CountryItem) spinnerFrom.getSelectedItem()).getCountryName();
@@ -147,7 +166,11 @@ public class MainActivity extends AppCompatActivity {
                 String currencyTo = ((CountryItem) spinnerTo.getSelectedItem()).getCountryName();
                 String amount = editText.getText().toString();
 
-                runConvert(currencyFrom, currencyTo, amount);
+                if (editText.length() > 0) {
+                    runConvert(currencyFrom, currencyTo, amount);
+                }else {
+                    tvConvertResult.setText("");
+                }
                 runConvert2(currencyFrom, currencyTo, "1");
 
                 String currencyFrom2 = ((CountryItem) spinnerTo.getSelectedItem()).getCountryName();
@@ -169,9 +192,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //Making Spinner To
-        spinnerTo = findViewById(R.id.spinner_to);
-        tvTextViewTo = findViewById(R.id.textViewTo);
-        tvTextViewFrom = findViewById(R.id.textViewFrom);
         mAdapter = new CountryAdapter(this, mCountryList);
         spinnerTo.setAdapter(mAdapter);
 
@@ -189,7 +209,11 @@ public class MainActivity extends AppCompatActivity {
                 String currencyTo = ((CountryItem) spinnerTo.getSelectedItem()).getCountryName();
                 String amount = editText.getText().toString();
 
-                runConvert(currencyFrom, currencyTo, amount);
+                if (editText.length() > 0) {
+                    runConvert(currencyFrom, currencyTo, amount);
+                }else {
+                    tvConvertResult.setText("");
+                }
                 runConvert2(currencyFrom, currencyTo, "1");
                 String currencyFrom2 = ((CountryItem) spinnerTo.getSelectedItem()).getCountryName();
                 String currencyTo2 = ((CountryItem) spinnerFrom.getSelectedItem()).getCountryName();
@@ -209,11 +233,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        //Finding our elements
-        tvConvertResult = findViewById(R.id.tv_convert_result);
-        editText = findViewById(R.id.editTextCurr);
-        textView1From = findViewById(R.id.textView1From);
-        textView1To = findViewById(R.id.textView1To);
+
 
         //EditText
         editText.addTextChangedListener(new TextWatcher() {
@@ -229,7 +249,11 @@ public class MainActivity extends AppCompatActivity {
                 String currencyTo = ((CountryItem) spinnerTo.getSelectedItem()).getCountryName();
                 String amount = editText.getText().toString();
 
-                runConvert(currencyFrom, currencyTo, amount);
+                if (editText.length() > 0) {
+                    runConvert(currencyFrom, currencyTo, amount);
+                }else {
+                    tvConvertResult.setText("");
+                }
                 runConvert2(currencyFrom, currencyTo, "1");
                 String currencyFrom2 = ((CountryItem) spinnerTo.getSelectedItem()).getCountryName();
                 String currencyTo2 = ((CountryItem) spinnerFrom.getSelectedItem()).getCountryName();
@@ -272,11 +296,35 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void initListener(){
+
+        adapter.setOnItemClickListener(new Adapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Intent intent = new Intent(MainActivity.this, NewsDetailActivity.class);
+
+                Article article = articles.get(position);
+                intent.putExtra("url",article.getUrl());
+                intent.putExtra("title",article.getTitle());
+                intent.putExtra("img",article.getUrlToImage());
+                intent.putExtra("date",article.getPublishedAt());
+                intent.putExtra("source",article.getSource().getName());
+                intent.putExtra("author",article.getAuthor());
+
+                startActivity(intent);
+            }
+        });
+
+    }
+
+
     public void LoadJson() {
         ApiInterface apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
         String country = Utils1.getCountry();
 
-        Call<News> call = apiInterface.getNews("currencies", "2020-03-31", "publishedAt", API_KEY);
+
+        Call<News> call = apiInterface.getNews("currencies", "2020-04-02", "publishedAt", API_KEY);
         call.enqueue(new Callback<News>() {
             @Override
             public void onResponse(Call<News> call, Response<News> response) {
@@ -291,13 +339,19 @@ public class MainActivity extends AppCompatActivity {
                     recyclerView.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
 
+                    initListener();
+
+
+
                 } else {
+
                     Toast.makeText(MainActivity.this, "No Result!", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<News> call, Throwable t) {
+
                 Log.e(TAG, t.getLocalizedMessage());
             }
         });
@@ -315,17 +369,15 @@ public class MainActivity extends AppCompatActivity {
 
                     float test = convertResultPOJO.getResult();
                     DecimalFormat df = new DecimalFormat("#");
-                    df.setMaximumFractionDigits(3);
+                    df.setMaximumFractionDigits(4);
                     tvConvertResult.setText(df.format(test));
                 } else {
-                    showToast("Load data error");
                     tvConvertResult.setText("");
                 }
             }
 
             @Override
             public void onFail(Exception e) {
-                showToast(e.getLocalizedMessage());
                 Log.d(L.D0, "onFail: " + e.getMessage());
             }
         });
@@ -343,17 +395,15 @@ public class MainActivity extends AppCompatActivity {
 
                     float test = convertResultPOJO.getResult();
                     DecimalFormat df = new DecimalFormat("#");
-                    df.setMaximumFractionDigits(3);
+                    df.setMaximumFractionDigits(4);
                     textView1From.setText("1 " + currencyFrom + " = " + df.format(test) + "\b" + currencyTo);
                 } else {
-                    showToast("Load data error");
                     textView1From.setText("");
                 }
             }
 
             @Override
             public void onFail(Exception e) {
-                showToast(e.getLocalizedMessage());
                 Log.d(L.D0, "onFail: " + e.getMessage());
             }
         });
@@ -371,25 +421,21 @@ public class MainActivity extends AppCompatActivity {
 
                     float test = convertResultPOJO.getResult();
                     DecimalFormat df = new DecimalFormat("#");
-                    df.setMaximumFractionDigits(3);
+                    df.setMaximumFractionDigits(4);
                     textView1To.setText("1 " + currencyFrom2 + " = " + df.format(test) + "\b" + currencyTo2);
                 } else {
-                    showToast("Load data error");
                     textView1To.setText("");
                 }
             }
 
             @Override
             public void onFail(Exception e) {
-                showToast(e.getLocalizedMessage());
                 Log.d(L.D0, "onFail: " + e.getMessage());
             }
         });
     }
 
-    private void showToast(String message) {
-        Toast.makeText(MainActivity.this, message, Toast.LENGTH_LONG).show();
-    }
+
 
     private List<CountryItem> initList(List<CountryItem> mCountryList) {
 
@@ -397,6 +443,7 @@ public class MainActivity extends AppCompatActivity {
         mCountryList.add(new CountryItem("UAH", R.drawable.uah, "Ukrainian Hrivnya"));
         mCountryList.add(new CountryItem("EUR", R.drawable.eur, "Euro"));
         mCountryList.add(new CountryItem("CNY", R.drawable.cny, "Chinese Yen"));
+        mCountryList.add(new CountryItem("RUB", R.drawable.rub, "Russian Ruble"));
         mCountryList.add(new CountryItem("CAD", R.drawable.cad, "Canadian Dollar"));
         mCountryList.add(new CountryItem("BTC", R.drawable.btc, "Bitcoin"));
         mCountryList.add(new CountryItem("AUD", R.drawable.aud, "Australian Dollar"));

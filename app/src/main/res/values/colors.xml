@@ -11,4 +11,6 @@
     <color name="Background">#f9f9fa</color>
     <color name="TextSubtitle">#4e4e4e</color>
     <color name="TextTitle">#262626</color>
+    <color name="grey">#494949</color>
+    <color name="orange">#F44336</color>
 </resources>
