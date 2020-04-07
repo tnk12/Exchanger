@@ -9,16 +9,15 @@
 
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:layout_width="407dp"
-        android:layout_height="302dp"
+        android:layout_width="401dp"
+        android:layout_height="294dp"
         android:layout_marginStart="5dp"
+        android:layout_marginTop="68dp"
         android:layout_marginEnd="5dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.818"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewConvertTo"
-        app:layout_constraintVertical_bias="1.0"
         tools:context=".MainActivity">
 
 
@@ -37,7 +36,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
-            android:layout_width="match_parent"
+            android:layout_width="407dp"
             android:layout_height="wrap_content"
             android:scrollbars="vertical"
             app:layout_anchor="@+id/nestedScrollView"
